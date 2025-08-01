@@ -45,9 +45,9 @@ module "eks" {
   cluster_endpoint_public_access           = true # EKS API 서버가 인터넷에서 접근 가능하도록 설정
   enable_cluster_creator_admin_permissions = true # 클러스터 생성 IAM 사용자/역할에게 system:masters 권한 부여
 
-  vpc_id                   = aws_vpc.ndrs_vpc.id
-  subnet_ids               = [aws_subnet.ndrs_dev_k8s_apne2_az1.id, aws_subnet.ndrs_dev_k8s_apne2_az3.id] # 노드 그룹이나 Fargate 등이 사용할 서브넷들
-  control_plane_subnet_ids = [aws_subnet.ndrs_dev_k8s_apne2_az1.id, aws_subnet.ndrs_dev_k8s_apne2_az3.id] # 컨트롤 플레인 ENI가 위치할 서브넷들 (Private 권장)
+  vpc_id                   = aws_vpc.yjs_vpc.id
+  subnet_ids               = [aws_subnet.yjs_k8s_apne2_az1.id, aws_subnet.yjs_k8s_apne2_az3.id] # 노드 그룹이나 Fargate 등이 사용할 서브넷들
+  control_plane_subnet_ids = [aws_subnet.yjs_k8s_apne2_az1.id, aws_subnet.yjs_k8s_apne2_az3.id] # 컨트롤 플레인 ENI가 위치할 서브넷들 (Private 권장)
 
   # EKS Managed Node Group(s)
   node_security_group_tags = {
@@ -77,8 +77,8 @@ module "eks" {
 
   fargate_profiles = {
     core-dns = {
-      name       = "ndrs-dev-coredns-fargate-profile"
-      subnet_ids = [aws_subnet.ndrs_dev_k8s_apne2_az1.id, aws_subnet.ndrs_dev_k8s_apne2_az3.id]
+      name       = "yjs-dev-coredns-fargate-profile"
+      subnet_ids = [aws_subnet.yjs_k8s_apne2_az1.id, aws_subnet.yjs_k8s_apne2_az3.id]
       selectors = [
         {
           namespace = "kube-system",

@@ -58,7 +58,7 @@ resource "aws_eks_pod_identity_association" "alb_controller_pod_identity_associa
 # 추가 보안 그룹(개인 설정)
 resource "aws_security_group" "alb_argocd_sg" {
   name        = "yjs-alb-argocd-sg"
-  vpc_id      = aws_vpc.ndrs_vpc.id
+  vpc_id      = aws_vpc.yjs_vpc.id
   tags = {
     Name = "yjs-alb-argocd-sg"
   }
