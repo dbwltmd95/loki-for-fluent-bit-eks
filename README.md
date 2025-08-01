@@ -17,15 +17,15 @@ Fluent Bit를 사용해서 로그를 수집하고, 수집된 로그를 Loki로 �
             Tag kube.*
             Mem_Buf_Limit 5MB
             Skip_Long_Lines On
-        
-    outputs: |
-      [OUTPUT]
-           name                   loki
-           match                  *
-           host                   loki.monitoring.svc.cluster.local
-           port                   3100
-           labels                 job=fluentbit
-           auto_kubernetes_labels on
+         
+      outputs: |
+        [OUTPUT]
+            name                   loki
+            match                  *
+            host                   loki.monitoring.svc.cluster.local
+            port                   3100
+            labels                 job=fluentbit
+            auto_kubernetes_labels on
 
 ### 3. Helm으로 Grafana 설치 및 DataSource 등록
     http://loki.monitoring.svc.cluster.local:3100 
