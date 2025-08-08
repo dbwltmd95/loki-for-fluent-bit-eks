@@ -5,6 +5,10 @@ module "eks" {
   cluster_name    = var.eks-cluster-name
   cluster_version = "1.33"
 
+  # kms 암호화 비활성화
+  create_kms_key                         = false
+  cluster_encryption_config              = {} # etcd 암복호화
+
   # false로 설정 시, addons(CoreDNS, kube-proxy 등) 모듈이 자동으로 관리됨
   bootstrap_self_managed_addons = false
 
@@ -59,7 +63,7 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    yjs-dev-eks-mng = {
+    yjs-eks-mng = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.large"]
@@ -77,7 +81,7 @@ module "eks" {
 
   fargate_profiles = {
     core-dns = {
-      name       = "yjs-dev-coredns-fargate-profile"
+      name       = "yjs-coredns-fargate-profile"
       subnet_ids = [aws_subnet.yjs_k8s_apne2_az1.id, aws_subnet.yjs_k8s_apne2_az3.id]
       selectors = [
         {
@@ -89,7 +93,6 @@ module "eks" {
   }
 
   tags = {
-    Environment = "dev"
     Terraform   = "true"
   }
 }

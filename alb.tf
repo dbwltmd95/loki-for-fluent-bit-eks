@@ -1,6 +1,6 @@
 # 기존 워커 노드 IAM Role 가져오기
 data "aws_iam_role" "worker_node_role" {
-  name = module.eks.eks_managed_node_groups["yjs-dev-eks-mng"].iam_role_name
+  name = module.eks.eks_managed_node_groups["yjs-eks-mng"].iam_role_name
 }
 
 # IAM 정책 정의
