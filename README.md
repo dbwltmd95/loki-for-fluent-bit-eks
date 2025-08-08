@@ -7,7 +7,7 @@ Fluent Bit를 사용해서 로그를 수집하고, 수집된 로그를 Loki로 �
 - grafana/loki-stack 사용 시, 이미지 버전 이슈로 Grafana에서 DataSource 등록이 되지 않는다. 
 - grafana/loki-distributed 사용하여 설치를 진행한다.
 - Fluent Bit로 로그를 수집하므로 Promtail은 비활성화 한다.
-
+ 
 ### 2. Helm으로 Fluent Bit 설치
       inputs: |
         [INPUT]
